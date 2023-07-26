@@ -22,9 +22,9 @@ public class Conversor<T extends Enum<T>> {
 
 
 
-    public Conversor(String tipo) {
-        this.tipoEntrada = new JComboBox<>();
-        this.tipoSalida = new JComboBox<>();
+    public Conversor(T[] elemento,String tipo) {
+        this.tipoEntrada = new JComboBox<>(elemento);
+        this.tipoSalida = new JComboBox<>(elemento);
         this.aLabel = new JLabel("a");
         aLabel.setHorizontalAlignment(JLabel.CENTER);
         this.igualLabel = new JLabel("=");

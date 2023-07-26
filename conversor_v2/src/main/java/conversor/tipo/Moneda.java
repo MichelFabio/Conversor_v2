@@ -1,6 +1,8 @@
-package conversor.controlador;
+package conversor.tipo;
 
 import conversor.conexion.ConexionCurrencyApi;
+import conversor.enums.UnidadesMoneda;
+import conversor.impl.Inicio;
 import conversor.modelo.Conversor;
 import conversor.modelo.Convertible;
 
@@ -11,13 +13,10 @@ import java.io.IOException;
 
 
 public class Moneda extends Conversor implements Convertible {
-
+    private ConexionCurrencyApi conexionCurrencyApi;
     public Moneda() {
-        super( "Moneda");
-        for (MedidasMoneda m : MedidasMoneda.values()){
-            agregarElemento(getTipoEntrada(),m);
-            agregarElemento(getTipoSalida(),m);
-        }
+        super( UnidadesMoneda.values(),"Moneda");
+
         getConvertirButton().addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -39,19 +38,12 @@ public class Moneda extends Conversor implements Convertible {
             }
         });
     }
-    private static void agregarElemento(JComboBox<MedidasMoneda> comboBox, MedidasMoneda elemento) {
-        DefaultComboBoxModel<MedidasMoneda> model = (DefaultComboBoxModel<MedidasMoneda>) comboBox.getModel();
-        model.addElement(elemento);
-    }
-
-
     @Override
     public double convertir()  {
         double val = 0;
-
+        conexionCurrencyApi = new ConexionCurrencyApi();
         String entrada = String.valueOf(getTipoEntrada().getSelectedItem());
         String salida = String.valueOf(getTipoSalida().getSelectedItem());
-        ConexionCurrencyApi conexionCurrencyApi = new ConexionCurrencyApi();
         try {
             conexionCurrencyApi.conectar(entrada,salida);
             val = conexionCurrencyApi.getFactorMultiplicador();

@@ -1,8 +1,7 @@
 package conversor.modelo;
 
 import javax.swing.*;
-
-public interface Convertible {
+public interface Convertible<T extends Enum<T>> {
 
     double convertir();
     void setValorSalida();
@@ -12,5 +11,6 @@ public interface Convertible {
         }
         return true;
     }
+
 
 }

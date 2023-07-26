@@ -1,6 +1,10 @@
-package conversor.controlador;
+package conversor.impl;
 
 import conversor.modelo.Conversor;
+import conversor.tipo.Longitud;
+import conversor.tipo.Masa;
+import conversor.tipo.Moneda;
+import conversor.tipo.Temperatura;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
@@ -44,6 +48,13 @@ public class Inicio {
 
 
         temperaturaButton = new JButton("Temperatura");
+        temperaturaButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                conversor = new Temperatura();
+                frame.dispose();
+            }
+        });
 
         longitudButton = new JButton("Longitud");
         longitudButton.addActionListener(new ActionListener() {
